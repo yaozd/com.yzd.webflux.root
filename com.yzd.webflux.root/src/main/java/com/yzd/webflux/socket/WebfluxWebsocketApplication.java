@@ -10,6 +10,7 @@ public class WebfluxWebsocketApplication {
 	 * 测试入口
 	 * http://localhost:8080/client
 	 * http://localhost:8080/heart
+	 * http://localhost:8080/online
 	 * @param args
 	 */
 	public static void main(String[] args) {

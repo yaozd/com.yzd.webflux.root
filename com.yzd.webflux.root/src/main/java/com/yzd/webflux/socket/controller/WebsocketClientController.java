@@ -1,6 +1,8 @@
 package com.yzd.webflux.socket.controller;
 
+import com.yzd.webflux.socket.inf.HeartMapSingleton;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,5 +18,15 @@ public class WebsocketClientController {
     @RequestMapping(value = "/heart", method = RequestMethod.GET)
     public String heart() {
         return "heart";
+    }
+
+    /**
+     * 在线人数
+     * @return
+     */
+    @RequestMapping(value = "/online", method = RequestMethod.GET)
+    public String online(Model model) {
+        model.addAttribute("size",HeartMapSingleton.getInstance().getCount().size());
+        return "online";
     }
 }

@@ -33,3 +33,7 @@ push方式实现稍复杂，需要服务端与PC端保持连接，这就需要�
 
 ## 参考
 - [Java8新特性 default关键字](https://blog.csdn.net/xcy1193068639/article/details/80249380)
+
+### 问题处理：
+- Netty内存溢出-（待解决）
+    - io.netty.util.ResourceLeakDetector       : LEAK: ByteBuf.release() was not called before it's garbage-collected
