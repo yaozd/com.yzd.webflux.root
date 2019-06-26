@@ -1,7 +1,7 @@
 package com.yzd.webflux.socket.inf;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class HeartMapSingleton {
@@ -14,7 +14,7 @@ public class HeartMapSingleton {
     private HeartMapSingleton() {
     }
 
-    private Map<String, AtomicInteger> count = new HashMap<>();
+    private ConcurrentHashMap<String, AtomicInteger> count = new ConcurrentHashMap<>();
 
     public Map<String, AtomicInteger> getCount() {
         return count;

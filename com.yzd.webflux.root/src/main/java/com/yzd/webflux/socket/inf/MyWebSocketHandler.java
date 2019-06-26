@@ -1,5 +1,6 @@
 package com.yzd.webflux.socket.inf;
 
+import cn.hutool.core.util.StrUtil;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketMessage;
@@ -28,6 +29,9 @@ public interface MyWebSocketHandler extends WebSocketHandler {
     default Mono<Void> handle(WebSocketSession session, Function<String, String> messageHandle, Supplier closeHandle, int endTime) {
 
         String sessionId = session.getId();
+        if (StrUtil.isBlank(sessionId)) {
+            System.out.println("is blank");
+        }
         // 开启热源
         UnicastProcessor<WebSocketMessage> hotSource = UnicastProcessor.create();
         Flux<WebSocketMessage> hotFlux = hotSource.publish().autoConnect();
@@ -56,26 +60,27 @@ public interface MyWebSocketHandler extends WebSocketHandler {
         ExecutorSingleton.getInstance().getThreadPool().execute(() -> {
             AtomicBoolean isClose = new AtomicBoolean(false);
             while (!isClose.get()) {
-                ThreadUtil.sleep(1000);
+                //
                 if (!HeartMapSingleton.getInstance().getCount().containsKey(sessionId)) {
                     HeartMapSingleton.getInstance().getCount().put(sessionId, new AtomicInteger(0));
                 }
                 //超时规则：心跳超过5次，关闭连接
-                if (HeartMapSingleton.getInstance().getCount().get(sessionId).incrementAndGet()> endTime) {
+                if (HeartMapSingleton.getInstance().getCount().get(sessionId).incrementAndGet() > endTime) {
                     HeartMapSingleton.getInstance().getCount().remove(sessionId);
                     hotSource.onComplete();
                     closeHandle.get();
                     isClose.set(true);
                     break;
                 }
+                ThreadUtil.sleep(1000);
                 // 发送PING，client回复PONG后，再重新计数。
-                try{
+                try {
                     hotSource.onNext(session.pingMessage(dbf -> {
                         String uuid = UUID.randomUUID().toString();
                         DataBuffer db = dbf.allocateBuffer(uuid.length());
                         return db.write(uuid.getBytes());
                     }));
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("hotSource.onNext-出错了。");
                     e.printStackTrace();
                 }
