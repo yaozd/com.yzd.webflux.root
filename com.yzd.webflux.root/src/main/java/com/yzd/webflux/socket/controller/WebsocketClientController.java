@@ -30,10 +30,10 @@ public class WebsocketClientController {
     @RequestMapping(value = "/online", method = RequestMethod.GET)
     public String online(Model model) {
         //测试使用 begin
-        Map<String, AtomicInteger> m=HeartMapSingleton.getInstance().getCount();
+        /*Map<String, AtomicInteger> m=HeartMapSingleton.getInstance().getCount();
         for (Map.Entry<String,AtomicInteger> entry : m.entrySet()) {
             System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-        }
+        }*/
         //测试使用 end
         model.addAttribute("size",HeartMapSingleton.getInstance().getCount().size());
         return "online";
