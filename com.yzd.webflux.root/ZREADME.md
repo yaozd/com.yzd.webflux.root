@@ -5,6 +5,9 @@
 - http://localhost:8080/online  在线人数，统计
 - http://localhost:8080/chatweb 聊天室
 
+## 当前容量规化
+- ExecutorSingleton线程池：10000；
+
 ## 使用思路--heart
 1. 通过心跳，保持客户端与服务器端长链接
 2. 通过 sock.send("Hello-World");每3秒发送一次请求，获取到用户想要的信息-（此处是轮训方式）
@@ -25,6 +28,7 @@
 - [看完让你彻底理解 WebSocket 原理，附完整的实战代码（包含前端和后端）](https://blog.csdn.net/li_jia_wei/article/details/81148053)
 
 ## 参考
+- [webflux的websocket连接与生命周期](https://blog.csdn.net/sinat_39291367/article/details/89467555)-推荐参考byArvin
 - [Spring-boot2 WebFlux WebSockit实现-实现心跳](https://blog.csdn.net/daisy_xiu/article/details/80708620)-推荐参考byArvin
 - [springboot2学习-webflux与websocke](https://blog.csdn.net/j903829182/article/details/80545876)
 - [京东到家基于netty与websocket的实践](https://blog.csdn.net/zl1zl2zl3/article/details/84660271)

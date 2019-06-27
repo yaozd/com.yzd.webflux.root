@@ -13,8 +13,8 @@ public class HeartMapSingleton {
 
     private HeartMapSingleton() {
     }
-
-    private ConcurrentHashMap<String, AtomicInteger> count = new ConcurrentHashMap<>();
+    //最大15000
+    private ConcurrentHashMap<String, AtomicInteger> count = new ConcurrentHashMap<>(15000);
 
     public Map<String, AtomicInteger> getCount() {
         return count;

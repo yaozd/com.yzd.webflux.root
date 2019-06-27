@@ -2,6 +2,7 @@ package com.yzd.webflux.socket.inf;
 
 import cn.hutool.core.util.StrUtil;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
@@ -75,11 +76,12 @@ public interface MyWebSocketHandler extends WebSocketHandler {
                 ThreadUtil.sleep(1000);
                 // 发送PING，client回复PONG后，再重新计数。
                 try {
-                    hotSource.onNext(session.pingMessage(dbf -> {
+                    /* hotSource.onNext(session.pingMessage(dbf -> {
                         String uuid = UUID.randomUUID().toString();
                         DataBuffer db = dbf.allocateBuffer(uuid.length());
                         return db.write(uuid.getBytes());
-                    }));
+                    }));*/
+                    hotSource.onNext(session.pingMessage(DataBufferFactory::allocateBuffer));
                 } catch (Exception e) {
                     System.out.println("hotSource.onNext-出错了。");
                     e.printStackTrace();

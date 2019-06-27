@@ -17,7 +17,8 @@ public class ExecutorSingleton {
 
     private ExecutorSingleton() {
     }
-    private ExecutorService threadPoolExecutor = new ThreadPoolExecutor(0, 1000, 5L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+    //线程池最大10000；
+    private ExecutorService threadPoolExecutor = new ThreadPoolExecutor(0, 10000, 5L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 
     public ExecutorService getThreadPool() {
         return threadPoolExecutor;
