@@ -9,7 +9,7 @@
             var sock = new WebSocket('ws://localhost:8080/test'); //创建WebSocket对象
             //连接建立
             sock.onopen = function () {
-                alert("open-01")
+                //alert("open-01")
                 setInterval(function () {
                     console.log("状态："+sock.state);
                     //如果当前状态为关闭，则直接退出。
