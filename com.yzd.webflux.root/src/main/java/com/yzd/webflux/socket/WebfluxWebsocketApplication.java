@@ -11,6 +11,8 @@ public class WebfluxWebsocketApplication {
 	 * http://localhost:8080/client
 	 * http://localhost:8080/heart
 	 * http://localhost:8080/online
+	 * http://localhost:8080/token
+	 * http://localhost:8080/chatweb
 	 * @param args
 	 */
 	public static void main(String[] args) {

@@ -7,14 +7,20 @@
     <script>
         $(function () {
             var sock = new WebSocket('ws://localhost:8080/test'); //创建WebSocket对象
-
+            //连接建立
             sock.onopen = function () {
+                alert("open-01")
                 setInterval(function () {
+                    console.log("状态："+sock.state);
+                    //如果当前状态为关闭，则直接退出。
+                    if(sock.state=="close"){
+                        return;
+                    }
                     sock.send("Hello-World");
                 }, 3000);
             };
 
-
+            //收到消息
             sock.onmessage = function (e) {
                 console.log('message', e.data);
                 //var msg = JSON.parse(e.data);
@@ -22,16 +28,28 @@
                 $("#output").append('<div>' + msg + '</div>')
 
             };
-
+            //连接关闭
             sock.onclose = function (e) {
                 alert(e);
+                //设置socket状态：close
+                sock.state="close";
                 console.log('close');
                 sock.close();
             };
+            //发生错误
+            sock.onerror = function (event) {
+                console.log("Connected to WebSocket server error"+event);
+            }
+            //手动关闭连接
+            $("#disconnect").click(function(){
+                alert("关闭当前WebSocket");
+                sock.close();
+            });
         });
     </script>
 </head>
 <body>
 <h1>Spring-boot2 WebFlux WebSockit实现-实现心跳</h1>
+<button class="echo-button" id="disconnect">点击关闭当前WebSocket</button>
 <div id="output"></div>
 </body>

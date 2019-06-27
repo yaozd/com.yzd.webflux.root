@@ -1,5 +1,6 @@
 package com.yzd.webflux.socket.config;
 
+import com.yzd.webflux.socket.handler.ChatHandler;
 import com.yzd.webflux.socket.handler.EchoHandler;
 import com.yzd.webflux.socket.handler.TestHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class WebSocketConfiguration {
     private TestHandler testHandler;
     @Autowired
     private EchoHandler echoHandler;
+    @Autowired
+    private ChatHandler chatHandler;
     @Bean
     public HandlerMapping webSocketMapping() {
         /**
@@ -32,6 +35,7 @@ public class WebSocketConfiguration {
         final Map<String, WebSocketHandler> map = new HashMap<>();
         map.put("/echo", echoHandler);
         map.put("/test", testHandler);
+        map.put("/chat", chatHandler);
 
         /**
          * SimpleUrlHandlerMapping 指定了 WebSocket 的路由配置

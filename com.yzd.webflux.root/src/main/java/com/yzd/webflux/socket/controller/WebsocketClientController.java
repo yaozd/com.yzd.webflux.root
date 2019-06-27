@@ -24,6 +24,24 @@ public class WebsocketClientController {
     }
 
     /**
+     * token测试
+     * @return
+     */
+    @RequestMapping(value = "/token", method = RequestMethod.GET)
+    public String token() {
+        return "token";
+    }
+
+    /**
+     * 聊天测试
+     * @return
+     */
+    @RequestMapping(value = "/chatweb", method = RequestMethod.GET)
+    public String chatweb() {
+        return "chat";
+    }
+
+    /**
      * 在线人数
      * @return
      */

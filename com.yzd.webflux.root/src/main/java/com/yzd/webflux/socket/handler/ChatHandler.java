@@ -2,14 +2,19 @@ package com.yzd.webflux.socket.handler;
 
 import cn.hutool.core.date.DateUtil;
 import com.yzd.webflux.socket.inf.MyWebSocketHandler;
+import com.yzd.webflux.socket.utils.ChatModel;
+import com.yzd.webflux.socket.utils.FastJsonUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketSession;
 import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
 
+/**
+ * 聊天
+ */
 @Component
-public class TestHandler implements MyWebSocketHandler {
+public class ChatHandler implements MyWebSocketHandler {
 
     @Override
     public Mono<Void> handle(WebSocketSession session) {
@@ -29,7 +34,13 @@ public class TestHandler implements MyWebSocketHandler {
      *
      */
     private Function<String, String> processor = in -> {
-        return "服务响应："+in+"；时间："+ DateUtil.now();
+        ChatModel model=new ChatModel();
+        //type:system;usermsg
+        model.setType("usermsg");
+        model.setMessage("hello "+in);
+        model.setName("yzd");
+
+        return FastJsonUtil.serialize(model);
     };
 }
 

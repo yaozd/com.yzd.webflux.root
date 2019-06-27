@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring-boot2 WebFlux WebSockit实现-通过请求地址中带参数，来传递token</title>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            var token='dcvuahsdnfajw12kjfasfsdf34'
+            //通过请求地址中带参数，来传递token
+            var sock = new WebSocket('ws://localhost:8080/test?'+token); //创建WebSocket对象
+
+            sock.onopen = function () {
+                sock.send(token);
+                setInterval(function () {
+                    sock.send("Hello-World");
+                }, 3000);
+            };
+
+
+            sock.onmessage = function (e) {
+                console.log('message', e.data);
+                //var msg = JSON.parse(e.data);
+                var msg = e.data;
+                $("#output").append('<div>' + msg + '</div>')
+
+            };
+
+            sock.onclose = function (e) {
+                alert(e);
+                console.log('close');
+                sock.close();
+            };
+        });
+    </script>
+</head>
+<body>
+<h1>Spring-boot2 WebFlux WebSockit实现-通过请求地址中带参数，来传递token</h1>
+<div id="output"></div>
+</body>

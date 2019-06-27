@@ -2,14 +2,27 @@
 ## 测试入口
 - http://localhost:8080/client
 - http://localhost:8080/heart-特别推荐参考byArvin-2019-06-25-1534
+- http://localhost:8080/online  在线人数，统计
+- http://localhost:8080/chatweb 聊天室
 
 ## 使用思路--heart
 1. 通过心跳，保持客户端与服务器端长链接
 2. 通过 sock.send("Hello-World");每3秒发送一次请求，获取到用户想要的信息-（此处是轮训方式）
 3. 使用场景：
     - 可用于活动通知与订单通知。
-    - 在线人数与在线时长（用于智能分析）
+    - 在线人数与在线时长（用于智能分析）（通过时间长短判断用户对产品的关注度）
     - 活动推送等
+    - 课程在线关看时长
+
+## websocket里面添加Token
+- 通过请求地址中带参数，来传递token
+    - 参考 ：[websocket里面添加Token](https://blog.csdn.net/qq_22560431/article/details/82895075)
+
+## websocket跨域访问测试
+- 跨域访问测试，默认情况下，就可以实现跨域访问
+
+## 基于 WebSocket 的聊天室
+- [看完让你彻底理解 WebSocket 原理，附完整的实战代码（包含前端和后端）](https://blog.csdn.net/li_jia_wei/article/details/81148053)
 
 ## 参考
 - [Spring-boot2 WebFlux WebSockit实现-实现心跳](https://blog.csdn.net/daisy_xiu/article/details/80708620)-推荐参考byArvin
